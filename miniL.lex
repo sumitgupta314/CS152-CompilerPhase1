@@ -8,7 +8,7 @@
 
    /* some common rules */
 DIGIT [0-9]
-
+LETTER [a-z|A-Z]
 %%
    /* specific lexer rules in regex */
    
@@ -60,7 +60,7 @@ DIGIT [0-9]
 	
 	/*Identifiers and Numbers*/
 
-
+({LETTER}+({LETTER}|{DIGIT})*([_]+({LETTER}|{DIGIT})+)?) {printf("INDENT %s\n", yytext); currPos += yyleng;}
 {DIGIT}+ {printf("NUMBER %s\n", yytext); currPos += yyleng;}
 
 	/*Other Special Symbols*/
