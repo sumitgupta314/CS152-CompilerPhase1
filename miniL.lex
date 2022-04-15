@@ -9,6 +9,7 @@
    /* some common rules */
 DIGIT [0-9]
 LETTER [a-z|A-Z]
+SYMBOLS [+|-|*|/|%|<|>|;|:|,|(|)[|]]
 %%
    /* specific lexer rules in regex */
    
@@ -80,7 +81,7 @@ LETTER [a-z|A-Z]
 "\n" {currLine++; currPos = 1;}	
 
 	/*Catching lexical errors*/
-	
+[^SYMBOLS] {printf("Error at line %d, column %d,: unrecognized symbol \"%s\" \n", currLine, currPos, yytext); exit(0);}
 
 
 
