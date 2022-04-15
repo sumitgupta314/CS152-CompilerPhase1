@@ -82,8 +82,8 @@ SYMBOLS [+|-|*|/|%|<|>|;|:|,|(|)[|]]
 
 	/*Catching lexical errors*/
 [^SYMBOLS] {printf("Error at line %d, column %d,: unrecognized symbol \"%s\" \n", currLine, currPos, yytext); exit(0);}
-
-
+([DIGIT|_]?(.)*[_]) {printf("Error at line %d, column %d,: identifier \"%s\" cannot end with an underscore\n", currLine, currPos, yytext); exit(0);}
+([^LETTER](.)*) {printf("Error at line %d, column %d,: identifier \"%s\" must begin with a letter\n", currLine, currPos, yytext); exit(0);}
 
 %%
 	/* C functions used in lexer */
