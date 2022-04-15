@@ -76,7 +76,7 @@ SYMBOLS [+|-|*|/|%|<|>|;|:|,|(|)[|]]
 	
 	/*Ignore comments and whitespaces*/
 [#][#](.)* {currPos += yyleng;}
-	/*[ ]+ {currPos += yyleng;}*/
+	/* [" "]+ {currPos += yyleng;} */
 [ \t]+ {currPos += yyleng;}
 "\n" {currLine++; currPos = 1;}	
 
@@ -88,8 +88,8 @@ SYMBOLS [+|-|*|/|%|<|>|;|:|,|(|)[|]]
 	/*check for invalid identifier - cannot end with underscore*/
 (({LETTER}+({LETTER}|{DIGIT})*([_]+({LETTER}|{DIGIT})+)?)[_]) {printf("Error at line %d, column %d,: identifier \"%s\" cannot end with an underscore\n", currLine, currPos, yytext); exit(0);}
 
-	/*the line below is causing errors - check for invalid identifier - must begin with letter*/
-	/*("\n"*[^LETTER]({LETTER}+({LETTER}|{DIGIT})*([_]+({LETTER}|{DIGIT})+)?)) {printf("Error at line %d, column %d,: identifier \"%s\" must begin with a letter\n", currLine, currPos, yytext); exit(0);}*/
+	/*check for invalid identifier - must begin with letter*/
+(({DIGIT}|[_])({LETTER}+({LETTER}|{DIGIT})*([_]+({LETTER}|{DIGIT})+)?)) {printf("Error at line %d, column %d,: identifier \"%s\" must begin with a letter\n", currLine, currPos, yytext); exit(0);}
 
 %%
 	/* C functions used in lexer */
