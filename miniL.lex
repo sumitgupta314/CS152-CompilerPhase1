@@ -74,8 +74,11 @@ LETTER [a-z|A-Z]
 ":=" {printf("ASSIGN\n"); currPos += yyleng;}
 	
 	/*Ignore comments and whitespaces*/
-	
-	
+[#](.)*[#] {currPos += yyleng;}
+[ ]+ {currPos += yyleng;}
+[ \t]+ {currPos += yyleng;}
+"\n" {currLine++; currPos = 1;}	
+
 	/*Catching lexical errors*/
 	
 
