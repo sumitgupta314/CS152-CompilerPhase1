@@ -61,7 +61,7 @@ SYMBOLS [+|-|*|/|%|<|>|;|:|,|(|)[|]]
 	
 	/*Identifiers and Numbers*/
 
-({LETTER}+({LETTER}|{DIGIT})*([_]+({LETTER}|{DIGIT})+)?) {printf("INDENT %s\n", yytext); currPos += yyleng;}
+({LETTER}+({LETTER}|{DIGIT})*([_]+({LETTER}|{DIGIT})+)?) {printf("IDENT %s\n", yytext); currPos += yyleng;}
 {DIGIT}+ {printf("NUMBER %s\n", yytext); currPos += yyleng;}
 
 	/*Other Special Symbols*/
